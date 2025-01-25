@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline" class="w-100">
+    <input
+      matInput
+      [(ngModel)]="keyword"
+      placeholder="Search questions..."
+      (input)="onSearch()"
+    />
+    <button mat-icon-button (click)="onSearch()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>

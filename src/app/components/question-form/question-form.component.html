@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="w-100">
+    <input
+      matInput
+      [(ngModel)]="question.questionText"
+      name="questionText"
+      placeholder="Question"
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <input
+      matInput
+      [(ngModel)]="question.answerText" 
+      name="answerText"
+      placeholder="Answer"
+      required
+    />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

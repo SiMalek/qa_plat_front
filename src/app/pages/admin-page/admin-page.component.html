@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <h2>Admin Page</h2>
+  
+    <!-- Search Bar -->
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+  
+    <!-- Question List -->
+    <div *ngIf="questions.length > 0">
+      <mat-card *ngFor="let question of questions" class="mb-3">
+        <mat-card-content>
+          <h3>{{ question.theme }}</h3>
+          <p><strong>Sub-Theme:</strong> {{ question.subTheme }}</p>
+          <p><strong>Category:</strong> {{ question.category }}</p>
+          <p><strong>Question:</strong> {{ question.questionText }}</p>
+          <p><strong>Answer:</strong> {{ question.answerText }}</p>
+          <button mat-raised-button color="primary" (click)="onEditQuestion(question)">Edit</button>
+          <button mat-raised-button color="warn" (click)="onDeleteQuestion(question.id)">Delete</button>
+          <button mat-raised-button color="accent" (click)="onFlagQuestion(question.id)">Flag</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <!-- Add/Edit Question Form -->
+    <mat-card *ngIf="isEditing" class="mb-3">
+      <mat-card-content>
+        <app-question-form
+          [question]="selectedQuestion || { id: 0, questionText: '', answerText: '', theme: '', subTheme: '', category: '', flagged: false, duplicate: false }"
+          (submit)="selectedQuestion ? onUpdateQuestion($event) : onAddQuestion($event)"
+        ></app-question-form>
+        <button mat-raised-button color="warn" (click)="onCancelEdit()">Cancel</button>
+      </mat-card-content>
+    </mat-card>
+  
+    <!-- Duplicate Questions -->
+    <div *ngIf="duplicates.length > 0">
+      <h3>Duplicate Questions</h3>
+      <mat-card *ngFor="let question of duplicates" class="mb-3">
+        <mat-card-content>
+          <h3>{{ question.theme }}</h3>
+          <p><strong>Sub-Theme:</strong> {{ question.subTheme }}</p>
+          <p><strong>Category:</strong> {{ question.category }}</p>
+          <p><strong>Question:</strong> {{ question.questionText }}</p>
+          <p><strong>Answer:</strong> {{ question.answerText }}</p>
+        </mat-card-content>
+      </mat-card>
+      <button mat-raised-button color="warn" (click)="onRemoveDuplicates()">Remove Duplicates</button>
+    </div>
+  
+    <!-- Find Duplicates Button -->
+    <button mat-raised-button color="accent" (click)="onFindDuplicates()">Find Duplicates</button>
+  </div>

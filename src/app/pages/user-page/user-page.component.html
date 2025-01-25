@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>User Dashboard</h1>
+    <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <mat-card *ngFor="let question of questions" class="mb-3">
+      <mat-card-content>
+        <h3>{{ question.questionText }}</h3>
+        <p>{{ question.answerText }}</p>
+        <button mat-raised-button color="warn" (click)="onFlagQuestion(question.id)">Flag Question</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
